@@ -25,4 +25,10 @@ private loadItems(){
   this.listItems = this.slService.getItems();
 
 }
+deleteItem(index: number){
+  this.slService.removeItem(index); 
+    this.loadItems();
+}
+
+
 }
