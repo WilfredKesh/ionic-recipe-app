@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm} from "@angular/forms";
 import { ShoppingListService} from  "../../services/shopping-list";
+import { Ingredient } from "../../models/ingredient";
 
 @Component({
   selector: 'page-shopping-list',
@@ -8,14 +9,20 @@ import { ShoppingListService} from  "../../services/shopping-list";
 })
 export class ShoppingListPage {
 
-constructor(private slService: ShoppingListService){
+constructor(private slService: ShoppingListService){}
 
-
-}
+listItems: Ingredient[]; 
 onAddItem(form: NgForm){
   this.slService.addItem(form.value.ingredientName, form.value.amount );
   form.reset();
+  this.loadItems();
   
 }
+ionViewWillEnter(){
+  this.loadItems();
+}
+private loadItems(){
+  this.listItems = this.slService.getItems();
 
+}
 }
